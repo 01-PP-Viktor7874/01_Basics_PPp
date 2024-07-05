@@ -9,7 +9,9 @@
 3. Fkt. Grundrechenarten : 
 4. Ausgabe in Konsole : check!
 */
-const ERROR_STR_DIV ="Teilen durch 0 nicht möglich"
+const prompt = require('prompt-sync')({sigint: true});
+const ERROR_STR_DIV ="Teilen durch 0 nicht möglich";
+const ERROR_STR_GEN ="Irgendwas ging Schief!";
 
 function add(a,b){
 	return a + b;
@@ -44,19 +46,34 @@ function calculator (a,b,op){ //Was soll gemacht werden ?
 	switch(op){
 		case "+": 
            return add(a,b); //Addition
-
 		case "-": 
           return substract(a,b); //Subtraktion
-
 		case "*": 
           return multiply(a,b); //Multiplikation
 		case "/": 
 		case ":": 
-		return division(a,b); //Division
+		   return division(a,b); //Division
 
 	default:
-		 return"Fehler";
+		 return ERROR_STR_DIV;
 	}
 }
 
 //Wie soll die Aufgabe gelöst werden ?
+
+startApp()
+function startApp(){
+	output(calculator(getNum1(),getNum2(), getOp()));
+}
+
+function getNum1(){
+	return parseInt(prompt("Zahl1?: "));
+}
+
+function getNum2(){
+	return parseInt(prompt("Zahl2?: "));
+}
+
+function getOp(){
+	return prompt ("OP?: ");
+}
